@@ -1,0 +1,12 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jd.transportation.dao.UpperAddressDao">
+
+    <insert id="save">
+        insert into t_upper_addr(id, upper_id) values(#{addressId}, #{upperId});
+    </insert>
+
+    <select id="getUpperLevelAddressId" resultType="Integer">
+        select upper_id from t_upper_addr where id=#{addressId};
+    </select>
+
+</mapper>

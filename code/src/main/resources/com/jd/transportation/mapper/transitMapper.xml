@@ -1,0 +1,26 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jd.transportation.dao.TransitDao">
+
+    <insert id="save" parameterType="transitInfo">
+        insert into t_transit(src_id, dst_id, trans_days, trans_time, effective_time, expiration_time)
+        values(#{srcId}, #{dstId}, #{transitDays}, #{transitTime}, #{effectiveTime}, #{expirationTime});
+    </insert>
+
+    <insert id="saveBatch">
+        insert into t_transit(src_id, dst_id, trans_days, trans_time, effective_time, expiration_time)
+        values
+        <foreach collection="list" item="transitInfo" separator=",">
+            (
+            #{transitInfo.srcId}, #{transitInfo.dstId}, #{transitInfo.transitDays}, #{transitInfo.transitTime},
+            #{transitInfo.effectiveTime}, #{transitInfo.expirationTime}
+            )
+        </foreach>
+    </insert>
+
+    <select id="getBySrcIdAndDstId" resultType="transitInfo">
+        select t.trans_days as transitDays, t.trans_time as transitTime, t.effective_time as effectiveTime,
+               t.expiration_time as expirationTime from t_transit as t
+        where src_id=#{srcId} and dst_id = #{dstId};
+    </select>
+
+</mapper>

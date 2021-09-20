@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+
+    <Properties>
+        <Property name="LOG_HOME">./Logs</Property>
+        <Property name="LOG_NAME">service.log</Property>
+        <Property name="PATTERN">%d [%p] %c [%t] %m%n</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+
+        <RandomAccessFile name="randomAccessFile" fileName="${LOG_HOME}/${LOG_NAME}"
+                          immediateFlush="false">
+            <PatternLayout pattern="${PATTERN}"/>
+        </RandomAccessFile>
+
+<!--        <RollingRandomAccessFile name="rolling_appender"-->
+<!--                                 immediateFlush="false" fileName="${LOG_HOME}/${LOG_NAME}"-->
+<!--                                 filePattern="${LOG_HOME}/%d{yyyy-MM-dd}/service_%d{yyyy-MM-dd HH-mm}_%i.log.gz">-->
+<!--            <PatternLayout pattern="${PATTERN}"/>-->
+<!--            <DefaultRolloverStrategy fileIndex="max" max="1000"/>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy />-->
+<!--                <SizeBasedTriggeringPolicy size="500MB"/>-->
+<!--            </Policies>-->
+<!--        </RollingRandomAccessFile>-->
+    </Appenders>
+    <Loggers>
+        <Logger name="org.springframework.boot" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Root level="info" includeLocation="false">
+            <AppenderRef ref="randomAccessFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

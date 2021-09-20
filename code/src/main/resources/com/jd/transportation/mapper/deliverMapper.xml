@@ -1,0 +1,26 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jd.transportation.dao.DeliverDao">
+
+    <insert id="save" parameterType="deliverInfo">
+        insert into t_deliver(dst_id, deliver_time, effective_time, expiration_time)
+        values (#{dstId}, #{deliverTime}, #{effectiveTime}, #{expirationTime});
+    </insert>
+
+    <insert id="saveBatch">
+        insert into t_deliver(dst_id, deliver_time, effective_time, expiration_time)
+        values
+        <foreach collection="list" item="deliverInfo" separator=",">
+            (
+            #{deliverInfo.dstId}, #{deliverInfo.deliverTime},
+            #{deliverInfo.effectiveTime}, #{deliverInfo.expirationTime}
+            )
+        </foreach>
+    </insert>
+
+    <select id="getByDstId" resultType="deliverInfo">
+        select t.deliver_time as deliverTime, t.effective_time as effectiveTime, t.expiration_time as expirationTime
+        from t_deliver as t
+        where dst_id = #{dstId};
+    </select>
+
+</mapper>
