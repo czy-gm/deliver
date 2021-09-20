@@ -1,3 +1,21 @@
+## **京东物流科技创新挑战赛-开发者赛道 季军复赛方案**
+
+
+
+赛题链接：https://jdata.jd.com/html/detail.html?id=13
+
+
+
+数据下载链接：链接：https://pan.baidu.com/s/16WujYVAOwJM1cRh8PiAETw  提取码：8k1b
+
+
+
+**京东这个比赛很坑，以后慎入**
+
+
+
+### 启动方法：
+
 1.启动Redis及MySQL服务器，在application.properties配置文件中配置相关数据库信息
 
 2.使用maven将源代码打成jar包
